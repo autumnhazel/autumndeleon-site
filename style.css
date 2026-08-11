@@ -1,0 +1,447 @@
+/* ==========================================================================
+   Autumn de León — portfolio site
+   One shared stylesheet for index.html, bio.html and cv.html
+   ========================================================================== */
+
+/* ---- Reset -------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body,
+h1,
+h2,
+h3,
+p,
+figure,
+dl,
+dd {
+  margin: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---- Design tokens -------------------------------------------------------
+   Palette kept from the original Webstudio build (deep plum + lavender wash),
+   just consolidated into variables so it's normalized across pages.
+---------------------------------------------------------------------------- */
+:root {
+  --color-ink: #1c1a1e;
+  --color-muted: #5b5560;
+  --color-plum: #47004f;
+  --color-plum-soft: #f4edf6;
+  --color-lavender-wash: #faf7fc;
+  --color-border: #e4dbe8;
+  --color-bg: #ffffff;
+
+  --font-display: Superclarendon, "Bookman Old Style", "URW Bookman", Georgia, "Times New Roman", serif;
+  --font-body: Optima, Candara, "Noto Sans", "Segoe UI", sans-serif;
+
+  --container-width: 46rem;       /* prose pages: bio, cv */
+  --container-width-wide: 64rem;  /* home hero */
+  --container-pad: clamp(1.25rem, 5vw, 3rem);
+
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-s: 1.25rem;
+  --space-m: 2rem;
+  --space-l: 3rem;
+  --space-xl: 4.5rem;
+}
+
+/* ---- Base ----------------------------------------------------------------*/
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background: var(--color-lavender-wash);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.site-nav {
+  flex-shrink: 0;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.site-footer {
+  flex-shrink: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  color: var(--color-ink);
+  line-height: 1.15;
+}
+
+/* Shared centered container. Same horizontal padding everywhere so nothing
+   drifts between pages (this replaces the mismatched left/right padding
+   the CV page had vs. the bio page). */
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+.container--wide {
+  max-width: var(--container-width-wide);
+}
+
+/* ---- Nav ------------------------------------------------------------------
+   Sticky plum bar, same on every page. Collapses to a hamburger under 640px.
+---------------------------------------------------------------------------- */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--color-plum);
+  color: #fff;
+}
+
+.site-nav__inner {
+  max-width: var(--container-width-wide);
+  margin-inline: auto;
+  padding: 0.9rem var(--container-pad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-m);
+}
+
+.site-nav__brand {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-nav__toggle {
+  display: none;
+  background: none;
+  border: 0;
+  color: #fff;
+  padding: 0.35rem;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.site-nav__toggle svg {
+  width: 22px;
+  height: 22px;
+}
+
+.site-nav__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-m);
+}
+
+.site-nav__list a {
+  font-size: 0.95rem;
+  text-decoration: none;
+  opacity: 0.9;
+  transition: opacity 0.15s ease;
+}
+
+.site-nav__list a:hover,
+.site-nav__list a:focus-visible,
+.site-nav__list a.is-active {
+  opacity: 1;
+}
+
+.site-nav__list a.is-active {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.site-nav__list a:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+  .site-nav__toggle {
+    display: block;
+  }
+
+  .site-nav__list {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    background: var(--color-plum);
+    padding: 0.5rem var(--container-pad) 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .site-nav__list.is-open {
+    display: flex;
+  }
+
+  .site-nav__list a {
+    width: 100%;
+    padding: 0.6rem 0;
+  }
+}
+
+/* ---- Page header (Bio / CV) ---------------------------------------------*/
+.page-header {
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-m);
+}
+
+.page-header h1 {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+}
+
+/* ---- Home / hero ----------------------------------------------------------*/
+.hero {
+  padding-block: clamp(3rem, 8vw, 5.5rem);
+}
+
+/* Home page: nav + hero fill the top ~90% of the screen, footer takes the
+   remaining ~10% at the bottom. */
+body.page-home main {
+  display: flex;
+}
+
+body.page-home .hero {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding-block: clamp(2rem, 6vw, 4rem);
+}
+
+body.page-home .site-footer {
+  min-height: 10vh;
+  display: flex;
+  align-items: center;
+}
+
+.hero__inner {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  align-items: center;
+  gap: clamp(2rem, 6vw, 4rem);
+}
+
+.hero__name {
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
+  margin-bottom: var(--space-s);
+}
+
+.hero__tagline {
+  color: var(--color-muted);
+  font-size: 1.1rem;
+  max-width: 42ch;
+}
+
+.hero__portrait {
+  justify-self: center;
+}
+
+.hero__portrait img {
+  width: min(320px, 100%);
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  box-shadow: 0 12px 30px -12px rgba(71, 0, 79, 0.35);
+}
+
+@media (max-width: 720px) {
+  .hero__inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero__tagline {
+    margin-inline: auto;
+  }
+
+  .hero__portrait {
+    order: -1;
+  }
+}
+
+/* ---- Bio page -------------------------------------------------------------*/
+.bio {
+  padding-bottom: var(--space-xl);
+}
+
+.bio p + p {
+  margin-top: var(--space-s);
+}
+
+.bio em,
+.bio i {
+  font-style: italic;
+}
+
+/* ---- CV page ---------------------------------------------------------------
+   Replaces the original single <p> full of manual <br> tags with real
+   sections, so spacing comes from margin/gap rather than blank lines.
+---------------------------------------------------------------------------- */
+.cv {
+  padding-bottom: var(--space-xl);
+}
+
+.cv-section {
+  padding-top: var(--space-l);
+  border-top: 1px solid var(--color-border);
+}
+
+.cv-section:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.cv-section h2 {
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-plum);
+  margin-bottom: var(--space-s);
+}
+
+.cv-section__note {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--color-muted);
+  margin-bottom: var(--space-s);
+}
+
+.cv-entries {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+}
+
+.cv-entry {
+  display: grid;
+  grid-template-columns: 9.5rem 1fr;
+  gap: var(--space-s);
+}
+
+.cv-entry__date {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.cv-entry__title {
+  font-weight: 600;
+}
+
+.cv-entry__detail {
+  color: var(--color-muted);
+  font-size: 0.95rem;
+  margin-top: 0.2rem;
+}
+
+.cv-entry__detail + .cv-entry__detail {
+  margin-top: 0.1rem;
+}
+
+@media (max-width: 560px) {
+  .cv-entry {
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
+  }
+}
+
+/* Simple list variant for entries without dates (Selected Collections,
+   Research Areas). */
+.cv-plain-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.cv-term-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.cv-term-list__row {
+  display: grid;
+  grid-template-columns: 9.5rem 1fr;
+  gap: var(--space-s);
+}
+
+.cv-term-list__term {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 560px) {
+  .cv-term-list__row {
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
+  }
+}
+
+/* ---- Footer ---------------------------------------------------------------*/
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  padding-block: var(--space-m);
+}
+
+.site-footer p {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+/* ---- Focus visibility everywhere ------------------------------------------*/
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-plum);
+  outline-offset: 2px;
+}
+
+/* ---- Reduced motion --------------------------------------------------------*/
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
