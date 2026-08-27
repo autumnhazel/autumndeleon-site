@@ -255,6 +255,9 @@ body.page-home .site-footer {
 .hero__tagline {
   color: var(--color-muted);
   font-size: 1.1rem;
+  text-align: justify;
+  text-justify: inter-word;
+  text-align-last: justify;
   max-width: 42ch;
 }
 
