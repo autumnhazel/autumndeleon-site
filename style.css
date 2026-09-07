@@ -36,11 +36,11 @@ ul {
 
 :root {
   --color-ink: #1c1a1e;
-  --color-muted: #5b5560;
+  --color-muted: ##605557;
   --color-plum: #800020;
   --color-plum-soft: ##dfbdc5;
-  --color-lavender-wash: #faf7fc;
-  --color-border: #e4dbe8;
+  --color-lavender-wash: ##fcf7f8;
+  --color-border: ##e8dbdd;
   --color-bg: #ffffff;
 
   --font-display: Superclarendon, "Bookman Old Style", "URW Bookman", Georgia, "Times New Roman", serif;
