@@ -25,3 +25,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+
+var message = 'You can reach Autumn at '
+    user = 'a',
+    domain = 'autumndeleon.com',
+    element = document.getElementById('email');
+
+    element.innerHTML = message + user + '@' + domain;
+    //OR
+    //'<a href="mailto:' + user + '@' + domain + '">Email</a>'  
